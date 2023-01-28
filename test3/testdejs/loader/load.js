@@ -6,7 +6,7 @@ module.exports = async (bot) =>{
         let command = require(`test3/testdejs/commandes/${file}`);
 
         if(command.name || command.name !== "string") throw new TypeError(`commandes ${file.slice(0,file.length - 3)} n'a pas de nom !`);
-        bot.commandes.set(command.name,command)
-        console.log(`commade ${file}`)
+        bot.commands.set(command.name,command)
+        console.log(`commande ${file}`)
     })
 }

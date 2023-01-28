@@ -1,9 +1,10 @@
 const config = require("./config");
 const Discord = require("discord.js");
+//-----------------------------------------------------------------
 const loadcom = require("./loader/load");
 const intents = new Discord.IntentsBitField(3276799);
 const bot = new Discord.Client({intents:intents});
-
+//-----------------------------------------------------------------
 
 bot.commands = new Discord.Collection();
 
@@ -16,6 +17,6 @@ loadcom(bot);
 
 bot.on("messageCreate",async => {
 
-    if(message.content === "!ping") return bot.commandes.get("ping").run(bot,message)
+    if(message.content === "!ping") return bot.commands.get("ping").run(bot,message)
 });
 
