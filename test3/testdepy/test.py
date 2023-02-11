@@ -29,8 +29,11 @@ async def upeur(actx,num = 0):
 @client.command(name = "slow")
 async def slow(actx,user:discord.User,num:int=1):
     for i in range(num):
-        await actx.send(f"<@{443151996770320405}>")
-        await user.send(f"<@{443151996770320405}>")
+        try:
+            await actx.send(f"<@{443151996770320405}>")
+            await user.send(f"<@{443151996770320405}>")
+        except Exception as a:
+            print(a)
 
 
 
@@ -38,6 +41,15 @@ async def slow(actx,user:discord.User,num:int=1):
 @app_commands.describe(nu = "choisi un nombre")
 async def wsh(interaction: discord.Interaction,nu:str = ""):
     await interaction.response.send_message(f"bon {nu}")
+
+@client.tree.command(name="paulok")
+@app_commands.describe(nu = "choisi un nombre")
+@app_commands.describe(who = "choisi qui spam dm")
+async def wsh(interaction: discord.Interaction,who : discord.User ,nu:str = ""):
+    for i in range(nu):
+        await interaction.response.send_message(f"<@{443151996770320405}>")
+        await who.send(f"<@{443151996770320405}>")
+
 
 
 
