@@ -25,7 +25,16 @@ async def test(actx):
 async def upeur(actx,num = 0):
     await actx.send(num)
 
-@client.tree.command(name="wsh",description="bonjour ca va ?",nsfw=False)
+
+@client.command(name = "slow")
+async def slow(actx,user:discord.User,num:int=1):
+    for i in range(num):
+        await actx.send(f"<@{443151996770320405}>")
+        await user.send(f"<@{443151996770320405}>")
+
+
+
+@client.tree.command(name="wsh")
 @app_commands.describe(nu = "choisi un nombre")
 async def wsh(interaction: discord.Interaction,nu:str = ""):
     await interaction.response.send_message(f"bon {nu}")
