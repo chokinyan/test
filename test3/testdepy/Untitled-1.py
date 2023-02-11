@@ -1,6 +1,7 @@
 import json
 from discord.ext import commands
 import discord
+from discord import app_commands
 #----------------------------------------------------------------------
 key = json.load(open("test3\disbot.json"))["key"]
 intents = discord.Intents.all()
@@ -13,11 +14,21 @@ async def on_ready():
 @client.command()
 async def test(actx):
     await actx.send("salut")
+    try:
+        synced = await client.tree.sync()
+        print(f'{len(synced)}')
+    except Exception as err:
+        print(err)
 
 
 @client.command(name = "upeur",description="ok bjr")
 async def upeur(actx,num = 0):
     await actx.send(num)
+
+@client.tree.command(name="wsh")
+@app_commands.describe(nu = "choisi un nombre")
+async def wsh(interaction: discord.Interaction,nu:str = ""):
+    await interaction.response.send_message(f"bon {nu}")
 
 
 
