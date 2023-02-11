@@ -1,22 +1,22 @@
 import json
 import discord
-import discord.message as mess
+from discord.ext import commands
 #----------------------------------------------------------------------
 key = json.load(open("test3\disbot.json"))["key"]
 intents = discord.Intents.all()
 client = discord.Client(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='!')
 #----------------------------------------------------------------------
 @client.event
 async def on_ready():
     print(" is ready and on")
 
-@client.event
-async def commande(ctx):
-    print(ctx.author,"bon tu fais ca mtn 46864")
+@commands.command
+async def test(ctx):
     await ctx.send("salut")
 
 
-
+bot.add_command(test)
 
 #----------------------------------------------------------------------
 """run le bot"""
