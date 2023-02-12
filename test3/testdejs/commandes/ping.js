@@ -1,7 +1,7 @@
 const {SlashCommandBuilder} = require("discord.js");
 
 module.exports = {
-    data : new SlashCommandBuilder()
+    data : test = new SlashCommandBuilder()
         .setName("ping")
         .setDescription("pong")
         .addStringOption(option =>
@@ -11,6 +11,6 @@ module.exports = {
             ),
 
     async excute(interaction){
-        return interaction.reply(`Pong ${7}`)
+        return interaction.reply(`salut ${interaction.options.name}`)
     },
 };
