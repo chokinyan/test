@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require("discord.js");
+const {SlashCommandBuilder, Options} = require("discord.js");
 
 module.exports = {
     data : new SlashCommandBuilder()
@@ -7,10 +7,11 @@ module.exports = {
         .addStringOption(option =>
             option.setName("test")
                 .setDescription("ce-ci est un test")
+                .setRequired(true)
         ),
 
     async excute(interaction){
-        const testo = interaction.option.getString()
+        const testo = undefined
         return interaction.reply(`Pong ${testo}`)
     },
 };
