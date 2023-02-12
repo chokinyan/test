@@ -30,12 +30,11 @@ async def upeur(actx,num = 0):
 async def slow(actx,user:discord.User,num:int=1):
     for i in range(num):
         try:
-            await actx.send(f"<@{396051755483267072}> , tu aimes minecraft ?")
-            await user.send(f"<@{396051755483267072}>, waw le tojan")
+            await actx.send(f"<@{443151996770320405}>")
+            await user.send(f"<@{443151996770320405}>")
             print(i)
         except Exception as a:
             print(a)
-
 
 @client.command(name = "ever")
 async def slow(actx,num:int=1):
