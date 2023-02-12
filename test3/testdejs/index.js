@@ -23,11 +23,13 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
+    console.log(typeof("test"))
+    const test = require('./commandes/ping')
 
 	if (!command) return;
 
 	try {
-		await command.execute(interaction);
+		await command["excute"](interaction);
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
