@@ -1,22 +1,38 @@
-const config = require("./config");
-const Discord = require("discord.js");
-//-----------------------------------------------------------------
-const loadcom = require("./loader/load");
-const intents = new Discord.IntentsBitField(3276799);
-const bot = new Discord.Client({intents:intents});
-//-----------------------------------------------------------------
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { token,guildId,clientId } = require('./config.json');
+//------------------------------------------------------------------------------------------
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+//------------------------------------------------------------------------------------------
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, 'commandes');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-bot.commands = new Discord.Collection();
+for (const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	client.commands.set(command.data.name, command);
+}
+//------------------------------------------------------------------------------------------
+client.once(Events.ClientReady, () => {
+	console.log('Ready!');
+});
+//------------------------------------------------------------------------------------------
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
 
-bot.login(config.token);
-bot.on("ready",async()=> {
-    console.log("il est pret")
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
 });
 
-loadcom(bot);
-
-bot.on("messageCreate",async => {
-
-    if(message.content === "!ping") return bot.commands.get("ping").run(bot,message)
-});
-
+//------------------------------------------------------------------------------------------
+client.login(token);
