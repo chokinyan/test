@@ -1,4 +1,5 @@
 const {SlashCommandBuilder,ChannelType} = require("discord.js");
+const {joinVoiceChannel, getVoiceConnection} = require("@discordjs/voice");
 
 module.exports = {
     data : test = new SlashCommandBuilder()
@@ -11,7 +12,13 @@ module.exports = {
             .addChannelTypes(ChannelType.GuildVoice)
             ),
 
-    async execute(interaction){
-        return interaction.reply("GG")
+    async excute(interaction){
+        const voicechan = interaction.options.getChannel('channel') 
+        const voiceconn = joinVoiceChannel({
+            channelId : voicechan.id,
+            guildId :interaction.guildId,
+            adapterCreator : interaction.guild.voiceAdapterCreator
+        });
+        
     }
 };
