@@ -3,6 +3,7 @@
     "@discordjs/voice": "^0.14.0",
     "ffmpeg": "^0.0.4",
     "fs": "^0.0.1-security",
-    "puppeteer": "^19.7.0"
+    "puppeteer": "^19.7.0",
+    "request": "^2.88.2"
   }
 }
