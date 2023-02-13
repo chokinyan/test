@@ -32,9 +32,9 @@ module.exports = {
         });
         voiceconn.subscribe(Player);
 
-        const ressource = createAudioResource("test3/testdejs/son/23.mp3");
-        
-        Player.play(ressource)
+        //const ressource = createAudioResource();
+
+        Player.play("test3\testdejs\son\23.mp3");
 
 
     }

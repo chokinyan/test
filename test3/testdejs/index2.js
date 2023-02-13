@@ -1,5 +1,7 @@
-const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
+const ffmpeg = require("ffmpeg");
+const { Client, Collection, Events, GatewayIntentBits,VoiceChannel,MessageEmbed,Discord} = require('discord.js');
 const { token,guildId,clientId } = require('./config.json');
+const {joinVoiceChannel, createAudioPlayer,createAudioResource, StreamType} = require("@discordjs/voice");
 
 const client = new Client({ intents: [
     GatewayIntentBits.Guilds,
@@ -27,12 +29,36 @@ client.once(Events.ClientReady, () => {
 	console.log(`ready !`);
 });
 
-client.once('messageCreate', async message =>{
-    if (message.author.bot) return;
+const Player = createAudioPlayer();
 
-    if (message.content === ".test"){
-    console.log("rezrzerzerezrzerz")
-    };
-});
+client.on("messageCreate", async message => {
+    if (message.content.startsWith("djs!play")) {
+      const file = message.attachments.first();
+      const channel = message.member.voice.channel;
+  
+      if (!channel || !file) return message.channel.send("....................");
+      const connection = joinVoiceChannel({
+        channelId: channel.id,
+        guildId: channel.guild.id,
+        adapterCreator: channel.guild.voiceAdapterCreator
+      });
+  
+      try {
+        connection;
+        connection.subscribe(Player);
+  
+        const resource = createAudioResource(file.url, {
+          inputType: StreamType.Arbitrary
+        });
+  
+        Player.play(resource);
+        message.channel.send({
+          content: "> playing: `" + file.name + "`, size: `" + file.size + "B`"
+        });
+       } catch (error) {
+        message.channel.send({ content: error.message || "Error" });
+      }
+    }
+  });
 
 client.login(token);
