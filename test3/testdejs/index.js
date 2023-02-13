@@ -5,6 +5,7 @@ const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
 const { token,guildId,clientId } = require('./config.json');
 const test = require('./reponse')
 const use_commands = require('./use_commands');
+const { channel } = require('node:diagnostics_channel');
 //------------------------------------------------------------------------------------------
 const client = new Client({ intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildBans,GatewayIntentBits.DirectMessages,GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent,GatewayIntentBits.AutoModerationConfiguration,GatewayIntentBits.AutoModerationExecution,GatewayIntentBits.DirectMessageReactions,GatewayIntentBits.DirectMessageTyping,GatewayIntentBits.GuildEmojisAndStickers,GatewayIntentBits.GuildIntegrations,GatewayIntentBits.GuildInvites,GatewayIntentBits.GuildMembers,GatewayIntentBits.GuildMessageReactions,GatewayIntentBits.GuildMessageTyping,GatewayIntentBits.GuildPresences,GatewayIntentBits.GuildScheduledEvents,GatewayIntentBits.GuildVoiceStates,GatewayIntentBits.GuildWebhooks]});
 //------------------------------------------------------------------------------------------
@@ -19,7 +20,7 @@ for (const file of commandFiles) {
 }
 //------------------------------------------------------------------------------------------
 client.once(Events.ClientReady, () => {
-	console.log(`dzhiaduizaida ${client.guilds.cache.map(guild => guild.id)}`)
+	console.log(`dzhiaduizaida ${client.guilds.cache.map(guild => guild.name)}`)
 	use_commands.reset(client.guilds.cache.map(guild => guild.id));
 	console.log(`ready ${client.user}`);
 });
@@ -40,6 +41,12 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+
+client.on(Events.GuildMemberAdd, async member => {
+	const channel = member.guild.channels.cache.find(channel => channel.name === "bienvenue");
+	console.log("bienvenue a un mongole en +")
+});
+
 
 client.on(Events.MessageCreate , async message => {
 	if (message.author.bot) return;

@@ -40,8 +40,5 @@ module.exports = {
         });
         const subcon = voiceconn.subscribe(Player);
 
-        
-
-
     }
 };
