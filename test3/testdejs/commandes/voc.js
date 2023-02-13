@@ -1,3 +1,4 @@
+require("ffmpeg-static")
 const {SlashCommandBuilder,ChannelType} = require("discord.js");
 const {joinVoiceChannel, createAudioPlayer,createAudioResource, StreamType} = require("@discordjs/voice");
 

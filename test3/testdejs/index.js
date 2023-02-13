@@ -46,7 +46,6 @@ client.on(Events.GuildMemberAdd, async member => {
 	console.log(`${member}`)
 });
 
-
 client.on(Events.MessageCreate , async message => {
 	if (message.author.bot) return;
 	else{
