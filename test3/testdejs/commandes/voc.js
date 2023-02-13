@@ -1,5 +1,3 @@
-const { createReadStream } = require('node:fs');
-const { join } = require('node:path');
 const {SlashCommandBuilder,ChannelType} = require("discord.js");
 const {joinVoiceChannel, createAudioPlayer,createAudioResource, StreamType} = require("@discordjs/voice");
 
@@ -25,28 +23,21 @@ module.exports = {
         ),
 
     async excute(interaction){
-        //const Player = createAudioPlayer();
-        //const voicechan = interaction.options.getChannel('channel');
+        const Player = createAudioPlayer();
+        const voicechan = interaction.options.getChannel('channel');
 
-        //const resource = createAudioResource(join(__dirname, 'file.mp3'))
+        const ressource = createAudioResource("test3\\testdejs\\son\\23.mp3");
+        Player.play(ressource)
 
-        //Player.play(ressource)
+        const voiceconn = joinVoiceChannel({
+            channelId : voicechan.id,
+            guildId :interaction.guildId,
+            adapterCreator : interaction.guild.voiceAdapterCreator
+        });
+        const subcon = voiceconn.subscribe(Player);
 
-        //const voiceconn = joinVoiceChannel({
-        //    channelId : voicechan.id,
-        //    guildId :interaction.guildId,
-        //    adapterCreator : interaction.guild.voiceAdapterCreator,
-        //    selfMute : false
-        //});
-        //const subcon = voiceconn.subscribe(Player);
-        //const voiceChannel = voicechan.id;
-        //console.log(voicechan)
-        if (interaction.client.user){
-            const guild = interaction.client.guilds.cache.get(interaction.guildId)
-            const member = guild.members.cache.get(interaction.member.user.id);
-            var voiceChannel = member.voice.channel;
-        console.log(typeof(voiceChannel));
-        console.log(voiceChannel);
-        }
+        
+
+
     }
 };

@@ -43,7 +43,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.on(Events.GuildMemberAdd, async member => {
 	const channel = member.guild.channels.cache.find(channel => channel.name === "bienvenue");
-	channel.send(`${member}`)
+	console.log(`${member}`)
 });
 
 
