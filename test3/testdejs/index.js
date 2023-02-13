@@ -20,7 +20,6 @@ for (const file of commandFiles) {
 }
 //------------------------------------------------------------------------------------------
 client.once(Events.ClientReady, () => {
-	console.log(`dzhiaduizaida ${client.guilds.cache.map(guild => guild.name)}`)
 	use_commands.reset(client.guilds.cache.map(guild => guild.id));
 	console.log(`ready ${client.user}`);
 });
@@ -38,13 +37,13 @@ client.on(Events.InteractionCreate, async interaction => {
 		await command["excute"](interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		await interaction.reply({ content: 'There was an error while executing this command!'});
 	}
 });
 
 client.on(Events.GuildMemberAdd, async member => {
 	const channel = member.guild.channels.cache.find(channel => channel.name === "bienvenue");
-	console.log("bienvenue a un mongole en +")
+	channel.send(`${member}`)
 });
 
 

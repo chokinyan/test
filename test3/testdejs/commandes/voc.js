@@ -25,20 +25,28 @@ module.exports = {
         ),
 
     async excute(interaction){
-        const Player = createAudioPlayer();
-        const voicechan = interaction.options.getChannel('channel');
+        //const Player = createAudioPlayer();
+        //const voicechan = interaction.options.getChannel('channel');
 
-        const resource = createAudioResource(join(__dirname, 'file.mp3'))
+        //const resource = createAudioResource(join(__dirname, 'file.mp3'))
 
-        Player.play(ressource)
+        //Player.play(ressource)
 
-        const voiceconn = joinVoiceChannel({
-            channelId : voicechan.id,
-            guildId :interaction.guildId,
-            adapterCreator : interaction.guild.voiceAdapterCreator,
-            selfMute : false
-        });
-        const subcon = voiceconn.subscribe(Player);
-
+        //const voiceconn = joinVoiceChannel({
+        //    channelId : voicechan.id,
+        //    guildId :interaction.guildId,
+        //    adapterCreator : interaction.guild.voiceAdapterCreator,
+        //    selfMute : false
+        //});
+        //const subcon = voiceconn.subscribe(Player);
+        //const voiceChannel = voicechan.id;
+        //console.log(voicechan)
+        if (interaction.client.user){
+            const guild = interaction.client.guilds.cache.get(interaction.guildId)
+            const member = guild.members.cache.get(interaction.member.user.id);
+            var voiceChannel = member.voice.channel;
+        console.log(typeof(voiceChannel));
+        console.log(voiceChannel);
+        }
     }
 };
