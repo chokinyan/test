@@ -1,4 +1,5 @@
 const {SlashCommandBuilder} = require("discord.js");
+// en sois ici c'est plus une commande de test que une commande de spam
 
 module.exports = {
     data : test = new SlashCommandBuilder()
@@ -6,6 +7,6 @@ module.exports = {
         .setDescription("coucou"),
 
     async excute(interaction){
-        return interaction.reply(`salut ${interaction.channel.deletable}`)
+        return interaction.reply(`salut ${interaction.user}`)
     },
 };
