@@ -20,7 +20,7 @@ for (const file of commandFiles) {
 client.once(Events.ClientReady, () => {
 	console.log(`dzhiaduizaida ${client.guilds.cache.map(guild => guild.id)}`)
 	use_commands.reset(client.guilds.cache.map(guild => guild.id));
-	console.log(`ready !`);
+	console.log(`ready ${client.user}`);
 });
 //1074436303908778096
 //------------------------------------------------------------------------------------------
@@ -43,14 +43,8 @@ client.on(Events.InteractionCreate, async interaction => {
 client.on(Events.MessageCreate , async message => {
 	if (message.author.bot) return;
 	else{
-		let insane = test.reponse(message)
-		if (insane === undefined){
-			return
+			test.reponse(message,client)
 		}
-		else{
-			message.reply(insane)
-		}
-	}
 });
 
 //------------------------------------------------------------------------------------------

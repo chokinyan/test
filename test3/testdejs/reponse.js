@@ -1,7 +1,7 @@
 module.exports = {
-    reponse : function reponse(message){
+    reponse : function reponse(message,client){
         if(message.content === "noir"){
-            return("beurk t'es sérieux la ?");
+            message.reply(`beurk t'es sérieux la ? Hein ${client.user}`);
         }
     }
 };
