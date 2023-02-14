@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
+// executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
 
-(async () => {
-  const browser = await puppeteer.launch();
+/*test = (async () => {
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
   const page = await browser.newPage();
 
   await page.goto('https://developer.chrome.com/');
@@ -21,10 +22,21 @@ const puppeteer = require('puppeteer');
   const textSelector = await page.waitForSelector(
     'text/Customize and automate'
   );
-  const fullTitle = await textSelector.evaluate(el => el.textContent);
 
+  const fullTitle = await textSelector.evaluate(el => el.textContent);
+    
   // Print the full title
   console.log('The title of this blog post is "%s".', fullTitle);
 
-  await browser.close();
+})();*/
+
+
+test = (async () => {
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
+  page = await browser.newPage();
+  await page.goto("https://www.monbureaunumerique.fr/");
+  await page.setViewport({width: 1000, height: 1000});
+  //await page.click(".fo-connect__link");
+
+
 })();

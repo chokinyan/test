@@ -32,7 +32,7 @@ module.exports = {
         const Player = createAudioPlayer();
         const voicechan = interaction.options.getChannel('channel');
 
-        const ressource = createAudioResource(ytdl("https://www.youtube.com/watch?v=dXjKh66BR2U"));
+        const ressource = createAudioResource("test3/testdejs/son/bochi.mp3");
 
         const voiceconn = joinVoiceChannel({
             channelId : voicechan.id,
@@ -42,10 +42,10 @@ module.exports = {
         
         const subcon = voiceconn.subscribe(Player);
         Player.play(ressource);
-        /*Player.on(AudioPlayerStatus.Idle, () =>{
-            const ressource = createAudioResource("test3/testdejs/son/17.mp3");
+        Player.on(AudioPlayerStatus.Idle, () =>{
+            const ressource = createAudioResource("test3/testdejs/son/bochi.mp3");
             Player.play(ressource);
-        });*/
+        });
 
     }
 };
