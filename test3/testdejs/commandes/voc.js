@@ -1,6 +1,9 @@
-require("ffmpeg-static")
+require("ffmpeg-static");
 const {SlashCommandBuilder,ChannelType} = require("discord.js");
-const {joinVoiceChannel, createAudioPlayer,createAudioResource, StreamType} = require("@discordjs/voice");
+const {joinVoiceChannel, createAudioPlayer,createAudioResource, StreamType, AudioPlayerStatus} = require("@discordjs/voice");
+
+
+
 
 module.exports = {
     data : test = new SlashCommandBuilder()
@@ -24,21 +27,24 @@ module.exports = {
         ),
 
     async excute(interaction){
+        interaction.reply("Je vais donc vous jouez une petite musique lez go !")
         const Player = createAudioPlayer();
         const voicechan = interaction.options.getChannel('channel');
 
-        const ressource = createAudioResource("test3\\testdejs\\son\\23.mp3");
-        Player.play(ressource)
+        const ressource = createAudioResource("test3/testdejs/son/bochi.mp3");
 
         const voiceconn = joinVoiceChannel({
             channelId : voicechan.id,
             guildId :interaction.guildId,
             adapterCreator : interaction.guild.voiceAdapterCreator
         });
-        const subcon = voiceconn.subscribe(Player);
-
         
-
+        const subcon = voiceconn.subscribe(Player);
+        Player.play(ressource);
+        Player.on(AudioPlayerStatus.Idle, () =>{
+            const ressource = createAudioResource("test3/testdejs/son/17.mp3");
+            Player.play(ressource);
+        });
 
     }
 };

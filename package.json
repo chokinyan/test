@@ -6,6 +6,7 @@
     "ffmpeg-static": "^5.1.0",
     "fs": "^0.0.1-security",
     "puppeteer": "^19.7.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "ytdl-core": "^4.11.2"
   }
 }
