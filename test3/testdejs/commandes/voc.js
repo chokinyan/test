@@ -1,4 +1,5 @@
 require("ffmpeg-static");
+const ytdl = require("ytdl-core")
 const {SlashCommandBuilder,ChannelType} = require("discord.js");
 const {joinVoiceChannel, createAudioPlayer,createAudioResource, StreamType, AudioPlayerStatus} = require("@discordjs/voice");
 
@@ -31,7 +32,7 @@ module.exports = {
         const Player = createAudioPlayer();
         const voicechan = interaction.options.getChannel('channel');
 
-        const ressource = createAudioResource("test3/testdejs/son/bochi.mp3");
+        const ressource = createAudioResource(ytdl("https://www.youtube.com/watch?v=dXjKh66BR2U"));
 
         const voiceconn = joinVoiceChannel({
             channelId : voicechan.id,
@@ -41,10 +42,10 @@ module.exports = {
         
         const subcon = voiceconn.subscribe(Player);
         Player.play(ressource);
-        Player.on(AudioPlayerStatus.Idle, () =>{
+        /*Player.on(AudioPlayerStatus.Idle, () =>{
             const ressource = createAudioResource("test3/testdejs/son/17.mp3");
             Player.play(ressource);
-        });
+        });*/
 
     }
 };
