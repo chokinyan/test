@@ -36,7 +36,8 @@ test = (async () => {
   page = await browser.newPage();
   await page.goto("https://www.monbureaunumerique.fr/");
   await page.setViewport({width: 1000, height: 1000});
-  //await page.click(".fo-connect__link");
-
-
+  await page.click(".fo-connect__link");
+  console.log("finito");
 })();
+
+//document.querySelector("body > main > div > div > div > div > div > form > fieldset:nth-child(7) > legend > button")
