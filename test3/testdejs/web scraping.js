@@ -37,6 +37,8 @@ test = (async () => {
   await page.goto("https://www.monbureaunumerique.fr/");
   await page.setViewport({width: 1000, height: 1000});
   await page.click(".fo-connect__link");
+  const n = await page.$("input[id='idp-DRAAF_parent_eleve']")
+  console.log(await n.select())
   console.log("finito");
 })();
 
