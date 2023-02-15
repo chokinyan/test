@@ -1,13 +1,14 @@
 require("ffmpeg-static");
 const ytdl = require("ytdl-core")
-const {SlashCommandBuilder,ChannelType} = require("discord.js");
-const {joinVoiceChannel, createAudioPlayer,createAudioResource, StreamType, AudioPlayerStatus} = require("@discordjs/voice");
+const {SlashCommandBuilder} = require("discord.js");
+const {joinVoiceChannel, createAudioPlayer,createAudioResource,AudioPlayerStatus} = require("@discordjs/voice");
 const fs = require('node:fs');
 const path = require('node:path');
 //--------------------------------------------------------------------------------------------------------------------------------
 let listmp = [];
 let listdir = [];
-let soundlist = []
+let soundlist = [];
+let soundqueu = [];
 const commandsPath = path.join(__dirname, '../son');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.mp3'));
 for (const file of commandFiles) {
@@ -16,49 +17,45 @@ for (const file of commandFiles) {
     listdir.push(filePath);
 };
 for(const xd of listmp){
-    soundlist.push({name : `Play ${xd} sound` , value : listmp.indexOf(xd)+1 , path : listdir[listmp.indexOf(xd)]});
+    soundlist.push({name : `Play ${xd} sound` , value : listmp.indexOf(xd) , path : listdir[listmp.indexOf(xd)]});
 };
-console.log(soundlist[0]["name"])
 //----------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
     data : test = new SlashCommandBuilder()
         .setName("voc")
-        .setDescription("test du voc join")
-        .addChannelOption(option => 
-            option.setName("channel")
-            .setDescription("Le channel et puis c'est un truc de test la pk je dois ecrire une description")
-            .setRequired(true)
-            .addChannelTypes(ChannelType.GuildVoice)
-            )
+        .setDescription("sound play")
         .addIntegerOption(option =>
-            option.setName("waw")
-            .setDescription("test")
+            option.setName("sound")
+            .setDescription("sound to play")
             .setRequired(true)
             .setChoices(
                 soundlist[0],
+                soundlist[1],
+                soundlist[2],
+                soundlist[3],
+                soundlist[4]
             )
         ),
 
     async excute(interaction){
-        interaction.reply("Je vais donc vous jouez une petite musique lez go !")
+        interaction.reply("Je vais donc vous jouez une petite musique lez go !");
         const Player = createAudioPlayer();
-        const voicechan = interaction.options.getChannel('channel');
 
-        const ressource = createAudioResource("test3/testdejs/son/23.mp3");
+        const ressource = createAudioResource(soundlist[interaction.options.getInteger("sound")].path);
+        //soundqueu.push(ressource);
 
         const voiceconn = joinVoiceChannel({
-            channelId : voicechan.id,
+            channelId : interaction.member.voice.channelId,
             guildId :interaction.guildId,
             adapterCreator : interaction.guild.voiceAdapterCreator
         });
         
         const subcon = voiceconn.subscribe(Player);
-        Player.play(ressource);
+        //Player.play(soundqueu[0]);
         Player.on(AudioPlayerStatus.Idle, () =>{
-            const ressource = createAudioResource("test3/testdejs/son/23.mp3");
             Player.play(ressource);
+            soundqueu.pop()
         });
-
     }
 };
