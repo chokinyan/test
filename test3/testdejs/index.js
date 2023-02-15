@@ -42,8 +42,14 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 client.on(Events.GuildMemberAdd, async member => {
+	if(member.id != 443151996770320405){
 	const channel = member.guild.channels.cache.find(channel => channel.name === "bienvenue");
 	console.log(`${member}`)
+	}
+	else{
+		const channel = member.guild.channels.cache.find(channel => channel.name === "général");
+		channel.send(`QUOI HaltJetzt SALE NOIR D'IMPOSTEUR RENTRE DANS TON SALE PAYS`);
+	}
 });
 
 client.on(Events.MessageCreate , async message => {

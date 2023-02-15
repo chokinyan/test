@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const ghost = require("g")
 // executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
 
 /*test = (async () => {
@@ -35,12 +34,11 @@ const ghost = require("g")
 test = (async () => {
   const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
   page = await browser.newPage();
-  const cursor = puppeteer.create
   await page.goto("https://www.monbureaunumerique.fr/");
   await page.setViewport({width: 1000, height: 1000});
   await page.click(".fo-connect__link");
-  //const n = await page.$(".js-wayf-composant");
-  //console.log(await n.screenshot);
+  await page.waitForSelector('#idp-EDU', { visible: true });
+  await page.click('#idp-EDU');
 
 })();
 
