@@ -18,7 +18,7 @@ for (const file of commandFiles) {
 for(const xd of listmp){
     soundlist.push({name : `Play ${xd} sound` , value : listmp.indexOf(xd)+1 , path : listdir[listmp.indexOf(xd)]});
 };
-console.log(soundlist)
+console.log(soundlist[0]["name"])
 //----------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
@@ -35,7 +35,7 @@ module.exports = {
             option.setName("waw")
             .setDescription("test")
             .setRequired(true)
-            .addChoices(
+            .setChoices(
                 soundlist[0],
             )
         ),
