@@ -5,57 +5,46 @@ const {joinVoiceChannel, createAudioPlayer,createAudioResource,AudioPlayerStatus
 const fs = require('node:fs');
 const path = require('node:path');
 //--------------------------------------------------------------------------------------------------------------------------------
-let listmp = [];
-let listdir = [];
-let soundlist = [];
-let soundqueu = [];
-const commandsPath = path.join(__dirname, '../son');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.mp3'));
-for (const file of commandFiles) {
-	const filePath = path.join(commandsPath, file);
-    listmp.push(file.replace(".mp3",''));
-    listdir.push(filePath);
-};
-for(const xd of listmp){
-    soundlist.push({name : `Play ${xd} sound` , value : listmp.indexOf(xd) , path : listdir[listmp.indexOf(xd)]});
-};
+Player = createAudioPlayer()
 //----------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
     data : test = new SlashCommandBuilder()
         .setName("voc")
         .setDescription("sound play")
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName("sound")
-            .setDescription("sound to play")
+            .setDescription("youtube url")
             .setRequired(true)
-            .setChoices(
-                soundlist[0],
-                soundlist[1],
-                soundlist[2],
-                soundlist[3],
-                soundlist[4]
-            )
         ),
 
-    async excute(interaction){
-        interaction.reply("Je vais donc vous jouez une petite musique lez go !");
-        const Player = createAudioPlayer();
+    async excute(interaction,stop = false){
+        if(stop == true){
+            interaction.reply("ok pas besoin d'etre aussi violent je ferme ma guelle");
+            Player.stop({force:true});
+        }
+        else{
+            interaction.reply("Je vais donc vous jouez une petite musique lez go !");
 
-        const ressource = createAudioResource(soundlist[interaction.options.getInteger("sound")].path);
-        //soundqueu.push(ressource);
+            //const ressource = createAudioResource(soundlist[interaction.options.getInteger("sound")].path);
+            //soundqueu.push(ressource);
+            const stream = ytdl(interaction.options.getString('sound'), {filter : 'audioonly'});
+            const ressource = createAudioResource(stream);
 
-        const voiceconn = joinVoiceChannel({
-            channelId : interaction.member.voice.channelId,
-            guildId :interaction.guildId,
-            adapterCreator : interaction.guild.voiceAdapterCreator
-        });
-        
-        const subcon = voiceconn.subscribe(Player);
-        voiceconn.receiver.createStram
-        Player.on(AudioPlayerStatus.Playing, () =>{
-            console.log(subcon)
-        });
-        await Player.play(ressource);
+
+            const voiceconn = joinVoiceChannel({
+                channelId : interaction.member.voice.channelId,
+                guildId :interaction.guildId,
+                adapterCreator : interaction.guild.voiceAdapterCreator
+            });
+            
+
+            Player.play(ressource);
+            const subcon = voiceconn.subscribe(Player);
+            //voiceconn.receiver.createStram
+            //Player.on(AudioPlayerStatus.Playing, () =>{
+            //    console.log(subcon)
+            //});
+        }
     }
 };

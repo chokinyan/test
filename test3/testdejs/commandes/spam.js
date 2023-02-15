@@ -7,6 +7,6 @@ module.exports = {
         .setDescription("coucou"),
 
     async excute(interaction){
-        interaction.reply(`salut ${interaction.user}`,ephemeral = true)
+        interaction.reply(`salut ${interaction.user}`,ephemeral = true);
     },
 };

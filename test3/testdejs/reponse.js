@@ -13,7 +13,7 @@ module.exports = {
             message.reply("Je te crois pas, je suis le meilleur des philosophe");
         }
         else if(message.content.includes("noir")){
-            message.reply(`beurk t'es sérieux la ? Hein ${message.author}`);
+           message.reply(`beurk t'es sérieux la ? Hein ${message.author}`);
         }
         else if(message.author.id == mecrelouid && tg != 4){
             tg ++;

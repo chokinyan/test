@@ -59,5 +59,17 @@ client.on(Events.MessageCreate , async message => {
 		}
 });
 
+client.on(Events.MessageUpdate, async message =>{
+	
+});
+
+
+
+
+
+
+
+
+
 //------------------------------------------------------------------------------------------
 client.login(token);
