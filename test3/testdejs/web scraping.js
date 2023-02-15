@@ -37,8 +37,7 @@ test = (async () => {
   await page.goto("https://www.monbureaunumerique.fr/");
   await page.setViewport({width: 1000, height: 1000});
   await page.click(".fo-connect__link");
-  await page.waitForSelector('#idp-EDU', { visible: true });
-  await page.click('#idp-EDU');
+  await expect(page).toClick('input[type="radio"][value="EDU"]');
 
 })();
 
