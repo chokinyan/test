@@ -4,11 +4,14 @@ let mecrelouid = 0
 module.exports = {
     reponse : function reponse(message,client){
         let croispas = Math.floor(Math.random()*101);
-        console.log(croispas);
-        if(croispas == 100){
+        console.log(`${croispas} de ${message.author} avec ${message.content}`);
+        if (message.content.includes(client.user)){
+            message.reply("Ils se prend pour qui celui-la a tag la planete là")
+        }
+        else if(croispas == 100){
             message.reply("Je te crois pas, je suis le meilleur des philosophe");
         }
-        if(message.content.includes("noir")){
+        else if(message.content.includes("noir")){
             message.reply(`beurk t'es sérieux la ? Hein ${message.author}`);
         }
         else if(message.author.id == mecrelouid && tg != 4){

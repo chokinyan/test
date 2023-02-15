@@ -2,9 +2,24 @@ require("ffmpeg-static");
 const ytdl = require("ytdl-core")
 const {SlashCommandBuilder,ChannelType} = require("discord.js");
 const {joinVoiceChannel, createAudioPlayer,createAudioResource, StreamType, AudioPlayerStatus} = require("@discordjs/voice");
-
-
-
+const fs = require('node:fs');
+const path = require('node:path');
+//--------------------------------------------------------------------------------------------------------------------------------
+let listmp = [];
+let listdir = [];
+let soundlist = []
+const commandsPath = path.join(__dirname, '../son');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.mp3'));
+for (const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+    listmp.push(file.replace(".mp3",''));
+    listdir.push(filePath);
+};
+for(const xd of listmp){
+    soundlist.push({name : `Play ${xd} sound` , value : listmp.indexOf(xd)+1 , path : listdir[listmp.indexOf(xd)]});
+};
+console.log(soundlist)
+//----------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
     data : test = new SlashCommandBuilder()
@@ -21,9 +36,7 @@ module.exports = {
             .setDescription("test")
             .setRequired(true)
             .addChoices(
-                { name : '5' , value : 5},
-                {name : '17' , value : 17},
-                {name : '23' , value : 23}
+                soundlist[0],
             )
         ),
 
