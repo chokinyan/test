@@ -52,10 +52,10 @@ module.exports = {
         });
         
         const subcon = voiceconn.subscribe(Player);
-        //Player.play(soundqueu[0]);
-        Player.on(AudioPlayerStatus.Idle, () =>{
-            Player.play(ressource);
-            soundqueu.pop()
+        voiceconn.receiver.createStram
+        Player.on(AudioPlayerStatus.Playing, () =>{
+            console.log(subcon)
         });
+        await Player.play(ressource);
     }
 };

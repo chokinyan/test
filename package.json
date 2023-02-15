@@ -6,6 +6,7 @@
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^5.1.0",
     "fs": "^0.0.1-security",
+    "ghost-cursor": "^1.1.16",
     "puppeteer": "^19.7.0",
     "puppeteer-core": "^19.7.0",
     "request": "^2.88.2",

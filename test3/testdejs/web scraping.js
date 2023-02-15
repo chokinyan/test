@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const ghost = require("g")
 // executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
 
 /*test = (async () => {
@@ -34,12 +35,13 @@ const puppeteer = require('puppeteer');
 test = (async () => {
   const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
   page = await browser.newPage();
+  const cursor = puppeteer.create
   await page.goto("https://www.monbureaunumerique.fr/");
   await page.setViewport({width: 1000, height: 1000});
   await page.click(".fo-connect__link");
-  const test = await page.$("#idp-DRAAF_parent_eleve");
-  const isRadioSelected = await (await test.getProperty("checked")).jsonValue();
-  console.log(isRadioSelected);
+  //const n = await page.$(".js-wayf-composant");
+  //console.log(await n.screenshot);
+
 })();
 
 //document.querySelector("body > main > div > div > div > div > div > form > fieldset:nth-child(7) > legend > button")
