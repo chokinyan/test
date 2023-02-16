@@ -33,21 +33,21 @@ const {identifiant,mdp} = require('./config.json');
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : true});
   const page = await browser.newPage();
   const keyboard = page.keyboard
   await page.goto("https://www.monbureaunumerique.fr/");
-  await page.setViewport({width: 1000, height: 1000});
+  await page.setViewport({width: 1920, height: 1080});
   //-----------------------------------------------------------------------------------------------
   /* choix du lieux */
   await page.click(".fo-connect__link");
   await page.waitForSelector('.form__label',{visible : 'visible'});
   await page.click('.form__label');
   await page.click('#button-submit',{delay : 50});
-  if (page.url() == "https://cas.monbureaunumerique.fr/login?service=https%3A%2F%2Fwww.monbureaunumerique.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT&submit=Valider"){
+  while (page.url() == "https://cas.monbureaunumerique.fr/login?service=https%3A%2F%2Fwww.monbureaunumerique.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT&submit=Valider"){
     await page.click('.form__label');
     await page.click('#button-submit',{delay : 50})
-  }
+  };
   //------------------------------------------------------------------------------------------------
   /* connexion */
   await page.waitForSelector('#bouton_eleve',{visible : 'visible'});
@@ -65,8 +65,9 @@ test = (async () => {
   else{
     await page.waitForSelector('body > div.header > div.header__set > div.header__set2 > nav > div > button');
     await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button');
-    await page.waitForSelector('body > div.header > div.header__set > div.header__set2 > nav > div > button > ul > li:nth-child(1)');
-    await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button > ul > li:nth-child(1)');
+    await page.screenshot({path: 'screenshot.png'});
+    console.log("fini");
+    await page.click("Lycée Louis Armand");
   }
 
   //await browser.close();
