@@ -37,7 +37,11 @@ test = (async () => {
   await page.goto("https://www.monbureaunumerique.fr/");
   await page.setViewport({width: 1000, height: 1000});
   await page.click(".fo-connect__link");
-  await expect(page).toClick('input[type="radio"][value="EDU"]');
+  await page.waitForSelector('.form__label','visible');
+  //console.log('waw')
+  await page.click('.form__label');
+
+  //await page.click('#button-submit');
 
 })();
 
