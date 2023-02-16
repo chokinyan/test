@@ -35,7 +35,7 @@ let listmess = [];
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : true,slowMo: 5});
   const page = await browser.newPage();
   const keyboard = page.keyboard
   await page.goto("https://www.monbureaunumerique.fr/");
@@ -69,7 +69,7 @@ test = (async () => {
     await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button');
     await page.click("body > div.header > div.header__set > div.header__set2 > nav > div > div > ul > li:nth-child(1) > a");
     await page.click("body > div.header > nav > ul.services-shortcut > li:nth-child(2) > a");
-    console.log(page.content())
+    console.log();
     //await page.screenshot({path: 'screenshot.png'});
     console.log("fini");
 
