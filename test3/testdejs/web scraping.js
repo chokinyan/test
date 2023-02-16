@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const {identifiant,mdp} = require('./config.json');
 // executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
 
 /*test = (async () => {
@@ -29,19 +30,30 @@ const puppeteer = require('puppeteer');
   console.log('The title of this blog post is "%s".', fullTitle);
 
 })();*/
-
+ 
 
 test = (async () => {
   const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
-  page = await browser.newPage();
+  const page = await browser.newPage();
+  const keyboard = page.keyboard
   await page.goto("https://www.monbureaunumerique.fr/");
   await page.setViewport({width: 1000, height: 1000});
+  //-----------------------------------------------------------------------------------------------
+  /* choix du lieux */
   await page.click(".fo-connect__link");
-  await page.waitForSelector('.form__label','visible');
-  //console.log('waw')
+  await page.waitForSelector('.form__label',{visible : 'visible'});
   await page.click('.form__label');
-
-  //await page.click('#button-submit');
+  await page.click('#button-submit');
+  //------------------------------------------------------------------------------------------------
+  /* connexion */
+  await page.waitForSelector('#bouton_eleve',{visible : 'visible'});
+  await page.click('#bouton_eleve');
+  //await page.waitForSelector('choixProfil hidden-item',{visible : 'visible'});
+  await page.click('#username');
+  await keyboard.sendCharacter(identifiant);
+  await page.click('#password');
+  await keyboard.sendCharacter(mdp);
+  await page.click('#bouton_valider');
 
 })();
 
