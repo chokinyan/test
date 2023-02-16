@@ -33,7 +33,7 @@ const {identifiant,mdp} = require('./config.json');
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : true});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false,slowMo: 500});
   const page = await browser.newPage();
   const keyboard = page.keyboard
   await page.goto("https://www.monbureaunumerique.fr/");
@@ -67,7 +67,7 @@ test = (async () => {
     await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button');
     await page.screenshot({path: 'screenshot.png'});
     console.log("fini");
-    await page.click("Lycée Louis Armand");
+    //await page.click("Lycée Louis Armand");
   }
 
   //await browser.close();
