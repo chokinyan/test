@@ -1,5 +1,7 @@
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('./config.json');
+let listmess = [];
+
 // executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
 
 /*test = (async () => {
@@ -33,11 +35,11 @@ const {identifiant,mdp} = require('./config.json');
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false,slowMo: 500});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
   const page = await browser.newPage();
   const keyboard = page.keyboard
   await page.goto("https://www.monbureaunumerique.fr/");
-  await page.setViewport({width: 1920, height: 1080});
+  await page.setViewport({width: 1000, height: 1000});
   //-----------------------------------------------------------------------------------------------
   /* choix du lieux */
   await page.click(".fo-connect__link");
@@ -65,10 +67,14 @@ test = (async () => {
   else{
     await page.waitForSelector('body > div.header > div.header__set > div.header__set2 > nav > div > button');
     await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button');
-    await page.screenshot({path: 'screenshot.png'});
+    await page.click("body > div.header > div.header__set > div.header__set2 > nav > div > div > ul > li:nth-child(1) > a");
+    await page.click("body > div.header > nav > ul.services-shortcut > li:nth-child(2) > a");
+    console.log(page.content())
+    //await page.screenshot({path: 'screenshot.png'});
     console.log("fini");
-    //await page.click("Lycée Louis Armand");
-  }
+
+
+  };
 
   //await browser.close();
 })();

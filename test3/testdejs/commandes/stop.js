@@ -5,7 +5,7 @@ const voc = require("./voc");
 
 module.exports = {
     data : test = new SlashCommandBuilder()
-    .setName("stop")
+    .setName("s")
     .setDescription("ferme ta gueule le bot"),
 
     async excute(interaction){

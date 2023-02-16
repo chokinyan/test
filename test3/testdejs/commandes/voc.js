@@ -21,7 +21,7 @@ module.exports = {
     async excute(interaction,stop = false){
         if(stop == true){
             interaction.reply("ok pas besoin d'etre aussi violent je ferme ma guelle");
-            Player.stop({force:true});
+            Player.stop();
         }
         else{
             interaction.reply("Je vais donc vous jouez une petite musique lez go !");
@@ -39,8 +39,9 @@ module.exports = {
             });
             
 
-            Player.play(ressource);
+            
             const subcon = voiceconn.subscribe(Player);
+            Player.play(ressource);
             //voiceconn.receiver.createStram
             //Player.on(AudioPlayerStatus.Playing, () =>{
             //    console.log(subcon)
