@@ -44,6 +44,10 @@ test = (async () => {
   await page.waitForSelector('.form__label',{visible : 'visible'});
   await page.click('.form__label');
   await page.click('#button-submit',{delay : 50});
+  if (page.url() == "https://cas.monbureaunumerique.fr/login?service=https%3A%2F%2Fwww.monbureaunumerique.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT&submit=Valider"){
+    await page.click('.form__label');
+    await page.click('#button-submit',{delay : 50})
+  }
   //------------------------------------------------------------------------------------------------
   /* connexion */
   await page.waitForSelector('#bouton_eleve',{visible : 'visible'});
@@ -58,8 +62,12 @@ test = (async () => {
   if (page.url() == "https://cas.monbureaunumerique.fr/saml/SAMLAssertionConsumer"){
     await page.click("body > main > div > div > div > div > div > div > div > div > div.msg__content > p:nth-child(4) > strong > a");
   }
-  await page.screenshot({path : "C:/Users/LOUISAB/Documents/github/test/test3/testdejs/video/screenshot.png",fullPage : true});
-  console.log(await page.url());
+  else{
+    await page.waitForSelector('body > div.header > div.header__set > div.header__set2 > nav > div > button');
+    await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button');
+    await page.waitForSelector('body > div.header > div.header__set > div.header__set2 > nav > div > button > ul > li:nth-child(1)');
+    await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button > ul > li:nth-child(1)');
+  }
 
-  await browser.close();
+  //await browser.close();
 })();
