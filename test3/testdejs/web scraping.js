@@ -33,7 +33,7 @@ const {identifiant,mdp} = require('./config.json');
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : true});
   const page = await browser.newPage();
   const keyboard = page.keyboard
   await page.goto("https://www.monbureaunumerique.fr/");
@@ -54,7 +54,11 @@ test = (async () => {
   await page.click('#password');
   await keyboard.sendCharacter(mdp);
   await page.click('#bouton_valider');
+  if (page.url() == "https://cas.monbureaunumerique.fr/saml/SAMLAssertionConsumer"){
+    await page.click("body > main > div > div > div > div > div > div > div > div > div.msg__content > p:nth-child(4) > strong > a");
+  }
+  await page.screenshot({path : "C:/Users/LOUISAB/Documents/github/test/test3/testdejs/video/screenshot.png",fullPage : true});
 
+
+  await browser.close()
 })();
-
-//document.querySelector("body > main > div > div > div > div > div > form > fieldset:nth-child(7) > legend > button")
