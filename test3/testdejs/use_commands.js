@@ -12,9 +12,7 @@ module.exports = {
 
 		// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 		for (const file of commandFiles) {
-			console.log(`${commandsPath}\\${file}`)
 			const command = require(`${commandsPath}\\${file}`);
-			console.log(command)
 			commands.push(command.data.toJSON());
 		}
 

@@ -35,7 +35,7 @@ let listmess = [];
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : true,slowMo: 10});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false,slowMo: 10,product : 'chrome'});
   const page = await browser.newPage();
   const keyboard = page.keyboard
   await page.goto("https://www.monbureaunumerique.fr/");
@@ -54,7 +54,6 @@ test = (async () => {
   /* connexion */
   await page.waitForSelector('#bouton_eleve',{visible : 'visible'});
   await page.click('#bouton_eleve',{delay : 50});
-  //await page.waitForSelector('choixProfil hidden-item',{visible : 'visible'});
   await page.click('#username');
   await keyboard.sendCharacter(identifiant);
   await page.click('#password');
