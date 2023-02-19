@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('./config.json');
 let listmess = [];
+let listauto = [];
 
 // executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
 
@@ -35,9 +36,9 @@ let listmess = [];
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',headless : false,slowMo: 10,product : 'chrome'});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
   const page = await browser.newPage();
-  const keyboard = page.keyboard
+  const keyboard = page.keyboard;
   await page.goto("https://www.monbureaunumerique.fr/");
   await page.setViewport({width: 1000, height: 1000});
   //-----------------------------------------------------------------------------------------------
@@ -58,7 +59,6 @@ test = (async () => {
   await keyboard.sendCharacter(identifiant);
   await page.click('#password');
   await keyboard.sendCharacter(mdp);
-  console.log("arfzafzafe")
   await page.click('#bouton_valider',{delay : 50});
   if (page.url() == "https://cas.monbureaunumerique.fr/saml/SAMLAssertionConsumer"){
     await page.click("body > main > div > div > div > div > div > div > div > div > div.msg__content > p:nth-child(4) > strong > a");
@@ -67,14 +67,31 @@ test = (async () => {
     await page.waitForSelector('body > div.header > div.header__set > div.header__set2 > nav > div > button');
     await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button');
     await page.click("body > div.header > div.header__set > div.header__set2 > nav > div > div > ul > li:nth-child(1) > a");
+
+//----------------------------------------------------------------------------------------------------------------------------------------
     await page.click("body > div.header > nav > ul.services-shortcut > li:nth-child(2) > a");
-    //await page.screenshot({path: 'screenshot.png'});
-    const searchValue = await page.$eval('#js_boite_reception', el => el);
-    console.log(searchValue);
+    const searchValue = await page.$x('//*[@id="js_boite_reception"]');
+    const test = await  page.$$eval('li',element => element.map(x => x.className));
+    let ok = [];
+    for (let i = 0;i<test.length;i++){
+      if(test[i]== "row row--full list-enhanced1__item"){
+        ok.push(test[i]);
+      };
+    };
+    for (let x=1;x<ok.length;x++){
+      
+      listauto.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col--xs-3.col--full > span > span:nth-child(7)`,(e => e.textContent)));
+    };
+    //#js_boite_reception > li:nth-child(1) > div.col.col--xs-5 > span.text-ellipsis > a
+    //#js_boite_reception > li:nth-child(2) > div.col--xs-3.col--full > span > span:nth-child(7)
+    console.log(listauto);
+
+
     console.log("fini");
-
-
   };
+
+
+
 
   //await browser.close();
 })();
