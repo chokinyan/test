@@ -36,7 +36,7 @@ let listauto = [];
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : false ,slowMo: 10 ,product : 'chrome'});
   const page = await browser.newPage();
   const keyboard = page.keyboard;
   await page.goto("https://www.monbureaunumerique.fr/");
@@ -79,13 +79,13 @@ test = (async () => {
       };
     };
     for (let x=1;x<ok.length;x++){
-      
-      listauto.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col--xs-3.col--full > span > span:nth-child(7)`,(e => e.textContent)));
+      listmess.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim())))
+      listauto.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col--xs-3.col--full > span > span:nth-child(7)`,(e => e.textContent.trim())));
     };
-    //#js_boite_reception > li:nth-child(1) > div.col.col--xs-5 > span.text-ellipsis > a
-    //#js_boite_reception > li:nth-child(2) > div.col--xs-3.col--full > span > span:nth-child(7)
-    console.log(listauto);
 
+    await page.click('#js_boite_reception > li:nth-child(1) > div.col.col--xs-5 > span.text-ellipsis > a');
+
+    console.log(await page.$eval('#discussion_message0 > div.row > div > blockquote',op => op.textContent));
 
     console.log("fini");
   };

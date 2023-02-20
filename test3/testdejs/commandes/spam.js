@@ -4,9 +4,23 @@ const {SlashCommandBuilder} = require("discord.js");
 module.exports = {
     data : test = new SlashCommandBuilder()
         .setName("spam")
-        .setDescription("coucou"),
+        .setDescription("coucou")
+        .addMentionableOption(option =>
+            option.setName("spammed")
+            .setDescription("qui spam")
+            .setRequired(true)
+        )
+        .addIntegerOption(option =>
+            option.setName('combien')
+            .setDescription("on le spam cb de fois")
+            .setRequired(true)
+            .setMinValue(1)
+            ),
 
     async excute(interaction){
-        interaction.reply(`salut ${interaction.user}`,ephemeral = true);
+        interaction.reply("salut on va commencer un potentiel délir", ephemeral = true);
+        for(let i = 0; i < interaction.options.getInteger('combien'); i++){
+            interaction.channel.send(`salut ${interaction.options.getMentionable('spammed')}`);
+        };
     },
 };
