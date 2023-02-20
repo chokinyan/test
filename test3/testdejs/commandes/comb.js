@@ -2,7 +2,8 @@ require("ffmpeg-static");
 const {SlashCommandBuilder,ChannelType} = require("discord.js");
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('../config.json');
-
+let listmess = [];
+let listauto = [];
 
 module.exports = {
     data : test = new SlashCommandBuilder()
@@ -45,10 +46,34 @@ module.exports = {
 
         }
 
-        await page.screenshot({path : "test3/testdejs/video/test.png"});
+        //await page.screenshot({path : "test3/testdejs/video/test.png"});
+
+        await page.click("body > div.header > nav > ul.services-shortcut > li:nth-child(2) > a");
+        const searchValue = await page.$x('//*[@id="js_boite_reception"]');
+        const test = await  page.$$eval('li',element => element.map(x => x.className));
+        let ok = [];
+        for (let i = 0;i<test.length;i++){
+          if(test[i]== "row row--full list-enhanced1__item"){
+            ok.push(test[i]);
+          };
+        };
+        for (let x=1;x<ok.length;x++){
+          
+          listauto.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col--xs-3.col--full > span > span:nth-child(7)`,(e => e.textContent)));
+        };
+        //#js_boite_reception > li:nth-child(1) > div.col.col--xs-5 > span.text-ellipsis > a
+        //#js_boite_reception > li:nth-child(2) > div.col--xs-3.col--full > span > span:nth-child(7)
+        console.log(listauto);
+    
+    
+        console.log("fini");
 
         await browser.close();
+        for(x of listauto){
+            interaction.channel.send(`auteur : ${x}`);
+        };
 
         //interaction.channel.send({files : [{ attachment: "test3/testdejs/video/test.png" }]});
-        }
+        
+    }
 }
