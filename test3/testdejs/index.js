@@ -1,8 +1,8 @@
 //documentation : https://discord.js.org/#/
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
-const { token,guildId,clientId } = require('./config.json');
+const { Client, Collection, Events, GatewayIntentBits, ClientPresence} = require('discord.js');
+const { token} = require('./config.json');
 const test = require('./reponse')
 const use_commands = require('./use_commands');
 const { channel } = require('node:diagnostics_channel');
@@ -59,13 +59,7 @@ client.on(Events.MessageCreate , async message => {
 		}
 });
 
-
-
-
-
-
-
-
-
 //------------------------------------------------------------------------------------------
-client.login(token);
+client.login(token).then((token) => {
+	client.user.setPresence({activities:[{name : 'Révolution !! '}],status : 'dnd'});
+});
