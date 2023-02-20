@@ -36,7 +36,7 @@ let listauto = [];
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : false ,slowMo: 10 ,product : 'chrome'});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
   const page = await browser.newPage();
   const keyboard = page.keyboard;
   await page.goto("https://www.monbureaunumerique.fr/");

@@ -12,7 +12,7 @@ module.exports = {
             interaction.reply("not anable to do this command");
         }
         else{
-            interaction.reply(`${interaction.client.ws.ping}`);
+            await interaction.user.send({files :[{attachment :'test3/testdejs/gif/téléchargé.gif'}],content : `Bon meme si tu te demande pk je ressois ca et que tu t'en fout ba la zone n2 est fermer le délire a durée et na plus d'utilité`});
         }
     },
 };
