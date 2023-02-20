@@ -1,11 +1,10 @@
 //documentation : https://discord.js.org/#/
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits, ClientPresence} = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
 const { token} = require('./config.json');
 const test = require('./reponse')
 const use_commands = require('./use_commands');
-const { channel } = require('node:diagnostics_channel');
 //------------------------------------------------------------------------------------------
 const client = new Client({ intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildBans,GatewayIntentBits.DirectMessages,GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent,GatewayIntentBits.AutoModerationConfiguration,GatewayIntentBits.AutoModerationExecution,GatewayIntentBits.DirectMessageReactions,GatewayIntentBits.DirectMessageTyping,GatewayIntentBits.GuildEmojisAndStickers,GatewayIntentBits.GuildIntegrations,GatewayIntentBits.GuildInvites,GatewayIntentBits.GuildMembers,GatewayIntentBits.GuildMessageReactions,GatewayIntentBits.GuildMessageTyping,GatewayIntentBits.GuildPresences,GatewayIntentBits.GuildScheduledEvents,GatewayIntentBits.GuildVoiceStates,GatewayIntentBits.GuildWebhooks]});
 //------------------------------------------------------------------------------------------
@@ -61,5 +60,5 @@ client.on(Events.MessageCreate , async message => {
 
 //------------------------------------------------------------------------------------------
 client.login(token).then((token) => {
-	client.user.setPresence({activities:[{name : 'Révolution !! '}],status : 'dnd'});
+	client.user.setPresence({activities:[{name : 'utile pour etre coder mtn '}],status : 'dnd'});
 });

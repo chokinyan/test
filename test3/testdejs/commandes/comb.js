@@ -1,15 +1,15 @@
 require("ffmpeg-static");
-const {SlashCommandBuilder,ChannelType} = require("discord.js");
+const {SlashCommandBuilder} = require("discord.js");
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('../config.json');
 let listmess = [];
 let listauto = [];
 module.exports = {
     data : test = new SlashCommandBuilder()
-        .setName("comb")
-        .setDescription("test co")
+        .setName("mbn_mess")
+        .setDescription("message")
         .addIntegerOption(option =>
-            option.setName("nbmess")
+            option.setName("nb_mess")
             .setDescription("nombre de message a afficher (max 50)")
             .setMinValue(1)
             .setMaxValue(50)

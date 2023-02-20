@@ -1,6 +1,5 @@
 require("ffmpeg-static");
 const {SlashCommandBuilder} = require("discord.js");
-const {AudioPlayer} = require("@discordjs/voice");
 const voc = require("./voc");
 
 module.exports = {
