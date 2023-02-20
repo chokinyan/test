@@ -8,7 +8,6 @@
     "fs": "^0.0.1-security",
     "puppeteer": "^19.7.0",
     "puppeteer-core": "^19.7.0",
-    "puppeteer-full-page-screenshot": "^1.2.2",
     "request": "^2.88.2",
     "ytdl-core": "^4.11.2"
   }
