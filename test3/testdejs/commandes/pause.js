@@ -9,6 +9,6 @@ module.exports = {
     .setDescription("attend stp"),
 
     async excute(interaction){
-        voc.excute(interaction = interaction,stop = false);
+        voc.excute(interaction = interaction,stop = false,pause = true);
     },
 };

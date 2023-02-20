@@ -13,7 +13,7 @@ module.exports = {
             interaction.reply("not anable to do this command");
         }
         else{
-            console.log("att")
+            interaction.reply(`${interaction.client.ws.ping}`);
         }
     },
 };

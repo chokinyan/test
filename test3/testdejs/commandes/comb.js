@@ -4,7 +4,6 @@ const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('../config.json');
 let listmess = [];
 let listauto = [];
-
 module.exports = {
     data : test = new SlashCommandBuilder()
         .setName("comb")
@@ -81,6 +80,7 @@ module.exports = {
             interaction.channel.send(`auteur : ${listauto[x]} objet : ${listmess[x]}`);
             interaction.user.send(`auteur : ${listauto[x]} objet : ${listmess[x]}`);
         };
+        
         //#discussion_message0 > div.row > div > blockquote
         
         //interaction.channel.send({files : [{ attachment: "test3/testdejs/video/test.png" }]});

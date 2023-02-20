@@ -2,7 +2,6 @@ require("ffmpeg-static");
 const ytdl = require("ytdl-core")
 const {SlashCommandBuilder} = require("discord.js");
 const {joinVoiceChannel, createAudioPlayer,createAudioResource,AudioPlayerStatus} = require("@discordjs/voice");
-const voila = require('play-dl')
 //--------------------------------------------------------------------------------------------------------------------------------
 Player = createAudioPlayer()
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -34,7 +33,6 @@ module.exports = {
             const stream = ytdl(interaction.options.getString('sound'), {filter : 'audioonly'});
             const ressource = createAudioResource(stream);
 
-            
             const voiceconn = joinVoiceChannel({
                 channelId : interaction.member.voice.channelId,
                 guildId :interaction.guildId,
