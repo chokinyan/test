@@ -7,7 +7,6 @@
     "ffmpeg-static": "^5.1.0",
     "fs": "^0.0.1-security",
     "ghost-cursor": "^1.1.16",
-    "play-dl": "^1.9.6",
     "puppeteer": "^19.7.0",
     "puppeteer-core": "^19.7.0",
     "puppeteer-full-page-screenshot": "^1.2.2",
