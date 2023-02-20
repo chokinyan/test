@@ -18,10 +18,14 @@ module.exports = {
             .setRequired(true)
         ),
 
-    async excute(interaction,stop = false){
+    async excute(interaction,stop = false,pause = false){
         if(stop == true){
             interaction.reply("ok pas besoin d'etre aussi violent je ferme ma guelle");
             Player.stop();
+        }
+        else if(pause == true){
+            interaction.reply("ok j'att ton truc");
+            Player.pause();
         }
         else{
             interaction.reply("Je vais donc vous jouez une petite musique lez go !");

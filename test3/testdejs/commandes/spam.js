@@ -18,9 +18,14 @@ module.exports = {
             ),
 
     async excute(interaction){
-        interaction.reply("salut on va commencer un potentiel délir", ephemeral = true);
-        for(let i = 0; i < interaction.options.getInteger('combien'); i++){
+        if(interaction.options.getMentionable('spammed').id  == 489650864441524232){
+            interaction.reply('Je ne peux pas avec cette personne désoler');
+        }
+        else{
+            interaction.reply("salut on va commencer un potentiel délir", ephemeral = true);
+            for(let i = 0; i < interaction.options.getInteger('combien'); i++){
             interaction.channel.send(`salut ${interaction.options.getMentionable('spammed')}`);
+            };
         };
     },
 };
