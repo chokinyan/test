@@ -2,7 +2,6 @@ const {SlashCommandBuilder} = require("discord.js");
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('../config.json');
 let listmess = [];
-let waw = undefined;
 
 async function jpg(){
     const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
@@ -66,6 +65,9 @@ jpg().then( finish => {
     console.log(waw);
 });
 
+
+console.log(waw);
+
 module.exports = {
     data : test = new SlashCommandBuilder()
         .setName("message")
@@ -74,7 +76,7 @@ module.exports = {
             option.setName('message')
             .setDescription("objet du message a afficher ( 1 page only )")
             .setChoices(
-                waw,
+                
             )
             .setRequired(true)
         ),
