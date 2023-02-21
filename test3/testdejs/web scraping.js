@@ -70,7 +70,7 @@ test = (async () => {
 
 //----------------------------------------------------------------------------------------------------------------------------------------
     await page.click("body > div.header > nav > ul.services-shortcut > li:nth-child(2) > a");
-    const searchValue = await page.$x('//*[@id="js_boite_reception"]');
+
     const test = await  page.$$eval('li',element => element.map(x => x.className));
     let ok = [];
     for (let i = 0;i<test.length;i++){
@@ -78,6 +78,7 @@ test = (async () => {
         ok.push(test[i]);
       };
     };
+    
     for (let x=1;x<ok.length;x++){
       listmess.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim())))
       listauto.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col--xs-3.col--full > span > span:nth-child(7)`,(e => e.textContent.trim())));
