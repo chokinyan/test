@@ -33,7 +33,8 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	try {
 		await command["excute"](interaction);
-		
+		//console.log(interaction.isChatInputCommand());
+		//console.log();
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!'});

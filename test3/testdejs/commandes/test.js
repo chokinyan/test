@@ -1,5 +1,5 @@
 require("ffmpeg-static");
-const {SlashCommandBuilder, StringSelectMenuBuilder, ActionRow, ActionRowBuilder} = require("discord.js");
+const {SlashCommandBuilder, StringSelectMenuBuilder, ActionRowBuilder} = require("discord.js");
 const voc = require("./voc");
 
 module.exports = {
@@ -16,8 +16,6 @@ module.exports = {
                 .setComponents(
                     new StringSelectMenuBuilder()
                     .setCustomId('select')
-                    .setMinValues(1)
-                    .setMaxValues(1)
                     .setPlaceholder("Rien n'a été selectionné")
                     .addOptions(
                         {
@@ -33,9 +31,9 @@ module.exports = {
                     ),
                 );
             
-            await interaction.reply({content :'test',components : [waw], ephemeral: true})
+            await interaction.reply({content :'test',components : [waw], ephemeral: true});
             //const selected = interaction.value;
-            //console.log(interaction.customId);
+
 
 
         }
