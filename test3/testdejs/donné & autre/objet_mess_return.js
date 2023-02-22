@@ -56,14 +56,10 @@ async function test() {
     //console.log(listmess.map(x => x));
     console.log("finie");
 
-    //browser.close();
+    browser.close();
     
     return listobjt;
 
 };
 
-let bon = test().catch(finish => finish);
-
-console.log(bon);
-
-module.exports = {listmess};
+test().then(finish => module.exports = {finish});
