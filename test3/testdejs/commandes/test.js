@@ -1,5 +1,5 @@
 require("ffmpeg-static");
-const {SlashCommandBuilder, StringSelectMenuBuilder, ActionRowBuilder} = require("discord.js");
+const {SlashCommandBuilder, StringSelectMenuBuilder, ActionRowBuilder, StringSelectMenuInteraction} = require("discord.js");
 const voc = require("./voc");
 
 module.exports = {
@@ -33,8 +33,9 @@ module.exports = {
             
             await interaction.reply({content :'test',components : [waw], ephemeral: true});
             //const selected = interaction.value;
-
-
+            //console.log(waw.toJSON().components[0].options[0])
+            //const strint = new StringSelectMenuInteraction();
+            //console.log(strint);
 
         }
     },

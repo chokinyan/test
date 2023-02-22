@@ -1,7 +1,7 @@
 //documentation : https://discord.js.org/#/
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, ChatInputCommandInteraction} = require('discord.js');
 const { token} = require('../testdejs/donné & autre/config.json');
 const test = require('../testdejs/donné & autre/reponse')
 const use_commands = require('./use_commands');
@@ -25,6 +25,11 @@ client.once(Events.ClientReady, () => {
 //1074436303908778096
 //------------------------------------------------------------------------------------------
 client.on(Events.InteractionCreate, async interaction => {
+	//console.log(`${interaction.component} zrzararezarzerzrzerezzrfszefsfes`);
+	if(interaction.component != undefined){
+		interaction.editReply('test reussi')
+	};
+
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
@@ -33,8 +38,6 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	try {
 		await command["excute"](interaction);
-		//console.log(interaction.isChatInputCommand());
-		//console.log();
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!'});
