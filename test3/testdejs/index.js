@@ -27,7 +27,7 @@ client.once(Events.ClientReady, () => {
 client.on(Events.InteractionCreate, async interaction => {
 	//console.log(`${interaction.component} zrzararezarzerzrzerezzrfszefsfes`);
 	if(interaction.component != undefined){
-		interaction.editReply('test reussi')
+		interaction.editReply('test reussi');
 	};
 
 	if (!interaction.isChatInputCommand()) return;
