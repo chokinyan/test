@@ -62,4 +62,6 @@ async function test() {
 
 };
 
-test().then(finish => module.exports = {finish});
+(async () =>{
+    const test = await test();
+})();
