@@ -59,28 +59,3 @@ async function jpg(){
     return listmess;
 
 };
-
-(async ()=>{
-    let waw = await jpg().then(finish => finish);
-    console.log(waw)
-})();
-
-
-//console.log(waw);
-
-module.exports = {
-    data : test = new SlashCommandBuilder()
-        .setName("message")
-        .setDescription("donne le message")
-        .addStringOption(option =>
-            option.setName('message')
-            .setDescription("objet du message a afficher ( 1 page only )")
-            .setChoices(...listmess)
-            .setRequired(true)
-        ),
-
-    async excute(interaction){
-        
-        interaction.reply("test");
-    },
-};

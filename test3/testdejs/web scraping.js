@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const {identifiant,mdp} = require('./config.json');
+const {identifiant,mdp} = require('../testdejs/donné & autre/config.json');
 let listmess = [];
 let listauto = [];
 
