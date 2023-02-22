@@ -1,3 +1,3 @@
-const {finish} = require('./donné & autre/objet_mess_return');
+const ok = require('./donné & autre/objet_mess_return');
 
-console.log(finish);
+console.log(ok.test)

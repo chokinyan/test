@@ -2,8 +2,6 @@ const {SlashCommandBuilder} = require("discord.js");
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('../donné & autre/config.json');
 const {finish} = require('../donné & autre/objet_mess_return');
-const testa = finish.map(x => x);
-console.log(testa);
 
 module.exports = {
     data : test = new SlashCommandBuilder()

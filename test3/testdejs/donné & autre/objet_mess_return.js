@@ -1,8 +1,7 @@
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('./config.json')
-let listmess = [];
 
-async function test() {
+async function obj() {
     let listobjt = []
     const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
     const page = await browser.newPage();
@@ -62,6 +61,5 @@ async function test() {
 
 };
 
-(async () =>{
-    const test = await test();
-})();
+obj()
+
