@@ -1,7 +1,7 @@
 require("ffmpeg-static");
 const ytdl = require("ytdl-core")
 const {SlashCommandBuilder} = require("discord.js");
-const {joinVoiceChannel, createAudioPlayer,createAudioResource,AudioPlayerStatus} = require("@discordjs/voice");
+const {joinVoiceChannel, createAudioPlayer,createAudioResource} = require("@discordjs/voice");
 //--------------------------------------------------------------------------------------------------------------------------------
 Player = createAudioPlayer()
 //----------------------------------------------------------------------------------------------------------------------------------
