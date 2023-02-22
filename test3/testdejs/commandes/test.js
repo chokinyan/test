@@ -1,5 +1,5 @@
 require("ffmpeg-static");
-const {SlashCommandBuilder} = require("discord.js");
+const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require("discord.js");
 const voc = require("./voc");
 
 module.exports = {
@@ -12,7 +12,32 @@ module.exports = {
             interaction.reply("not anable to do this command");
         }
         else{
-            await interaction.user.send({files :[{attachment :'test3/testdejs/gif/téléchargé.gif'}],content : `Bon meme si tu te demande pk je ressois ca et que tu t'en fout ba la zone n2 est fermer le délire a durée et na plus d'utilité`});
+            const waw = new ActionRowBuilder()
+                .addComponents(
+                    new StringSelectMenuBuilder ()
+                    .setCustomId('select')
+                    .setMinValues(1)
+                    .setMaxValues(1)
+                    .setPlaceholder("Rien n'a été selectionné")
+                    .addOptions(
+                        {
+                            label : 'test',
+                            description : 'test1',
+                            value : 'test1'
+                        },
+                        {
+                            label : 'test2',
+                            description : 'test2',
+                            value : 'test2'
+                        }
+                    ),
+                );
+            
+            await interaction.reply({content :'test',components : [waw], ephemeral: true})
+            //const selected = interaction.value;
+            //console.log(interaction.customId);
+
+
         }
     },
 };

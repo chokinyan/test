@@ -28,12 +28,13 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
-	console.log(interaction)
+	
 
 	if (!command) return;
 
 	try {
 		await command["excute"](interaction);
+		console.log(interaction.options);
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!'});
