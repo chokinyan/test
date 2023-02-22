@@ -1,9 +1,9 @@
-const {SlashCommandBuilder} = require("discord.js");
 const puppeteer = require('puppeteer');
-const {identifiant,mdp} = require('../donné & autre/config.json');
-let listmess = [{name : "test" , value : "test"},{name : "test3" , value : "test2"},{name : "5" , value : "14"}];
+const {identifiant,mdp} = require('./config.json')
+let listmess = [];
 
-async function jpg(){
+async function test() {
+    let listobjt = []
     const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
     const page = await browser.newPage();
     const keyboard = page.keyboard
@@ -50,12 +50,20 @@ async function jpg(){
     };
 
     for (let x=1;x<ok.length;x++){
-        listmess.push({name : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim())), value : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))});
+        listobjt.push({name : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim())), value : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))});
     };
 
-    //console.log(listmess.map(x => x))
+    //console.log(listmess.map(x => x));
     console.log("finie");
 
-    return listmess;
+    //browser.close();
+    
+    return listobjt;
 
 };
+
+let bon = test().catch(finish => finish);
+
+console.log(bon);
+
+module.exports = {listmess};
