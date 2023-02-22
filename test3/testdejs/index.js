@@ -28,13 +28,12 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
-	
 
 	if (!command) return;
 
 	try {
 		await command["excute"](interaction);
-		console.log(interaction.options);
+		
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!'});
@@ -53,10 +52,7 @@ client.on(Events.GuildMemberAdd, async member => {
 });
 
 client.on(Events.MessageCreate , async message => {
-	if (message.author.bot) return;
-	else{
-			test.reponse(message,client)
-		}
+	test.reponse(message,client)
 });
 
 //------------------------------------------------------------------------------------------

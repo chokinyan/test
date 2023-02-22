@@ -1,5 +1,5 @@
 require("ffmpeg-static");
-const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require("discord.js");
+const {SlashCommandBuilder, StringSelectMenuBuilder, ActionRow, ActionRowBuilder} = require("discord.js");
 const voc = require("./voc");
 
 module.exports = {
@@ -13,8 +13,8 @@ module.exports = {
         }
         else{
             const waw = new ActionRowBuilder()
-                .addComponents(
-                    new StringSelectMenuBuilder ()
+                .setComponents(
+                    new StringSelectMenuBuilder()
                     .setCustomId('select')
                     .setMinValues(1)
                     .setMaxValues(1)
