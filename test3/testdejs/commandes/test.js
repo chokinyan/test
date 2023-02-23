@@ -31,12 +31,13 @@ module.exports = {
                     ),
                 );
             
-            return await interaction.reply({content :'test',components : [waw], ephemeral: true});
-            //const selected = interaction.value;
-            //console.log(waw.toJSON().components[0].options[0])
-            //const strint = new StringSelectMenuInteraction();
-            //console.log(strint);
-
-        }
+            await interaction.reply({content :'test',components : [waw], ephemeral: true});
+        };
     },
+
+    async excomp(interaction){
+        //console.log(interaction);
+        await interaction.update({content : `${interaction.values}`});
+    },
+
 };

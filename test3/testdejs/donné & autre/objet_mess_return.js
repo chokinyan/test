@@ -49,7 +49,7 @@ const test = async function obj() {
     };
 
     for (let x=1;x<ok.length;x++){
-        listobjt.push({name : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim())), value : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))});
+        listobjt.push({label : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim())), value : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))});
     };
 
     //console.log(listmess.map(x => x));
@@ -60,5 +60,8 @@ const test = async function obj() {
     return listobjt;
 
 };
+
+
+console.log(test());
 
 module.exports = {test};

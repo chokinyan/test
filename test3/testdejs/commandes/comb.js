@@ -9,6 +9,7 @@ module.exports = {
         .setDescription("message"),
 
         async excute(interaction){
+            interaction.reply({content : "test de connexion en cours" , ephemeral : true});
             const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
             const page = await browser.newPage();
             const keyboard = page.keyboard
@@ -44,10 +45,7 @@ module.exports = {
 
             };
             //await page.screenshot({path : "test3/testdejs/video/test.png"});
-
-            interaction.user.send('connexion reussi !')
-
+            interaction.update({content : "test de connexion reussie"});
             await browser.close();
-        
     }
 }

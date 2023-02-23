@@ -1,10 +1,11 @@
 //documentation : https://discord.js.org/#/
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits, ChatInputCommandInteraction} = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits,StringSelectMenuComponent} = require('discord.js');
 const { token} = require('../testdejs/donné & autre/config.json');
 const test = require('../testdejs/donné & autre/reponse')
 const use_commands = require('./use_commands');
+const compcom = [{name : 'select',comm : 'test'},{name : 'wawwaw',comm : 'test2'}]
 //------------------------------------------------------------------------------------------
 const client = new Client({ intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildBans,GatewayIntentBits.DirectMessages,GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent,GatewayIntentBits.AutoModerationConfiguration,GatewayIntentBits.AutoModerationExecution,GatewayIntentBits.DirectMessageReactions,GatewayIntentBits.DirectMessageTyping,GatewayIntentBits.GuildEmojisAndStickers,GatewayIntentBits.GuildIntegrations,GatewayIntentBits.GuildInvites,GatewayIntentBits.GuildMembers,GatewayIntentBits.GuildMessageReactions,GatewayIntentBits.GuildMessageTyping,GatewayIntentBits.GuildPresences,GatewayIntentBits.GuildScheduledEvents,GatewayIntentBits.GuildVoiceStates,GatewayIntentBits.GuildWebhooks]});
 //------------------------------------------------------------------------------------------
@@ -24,10 +25,13 @@ client.once(Events.ClientReady, () => {
 });
 //1074436303908778096
 //------------------------------------------------------------------------------------------
-client.on(Events.InteractionCreate, async interaction => {
+client.on(Events.InteractionCreate, async interaction  => {
 	//console.log(`${interaction.component} zrzararezarzerzrzerezzrfszefsfes`);
 	if(interaction.component != undefined){
-		interaction.editReply('test reussi');
+		//const command = client.commands.get();
+		const comm = compcom.map(x => (x.name == interaction.customId)).indexOf(true);
+		const command = client.commands.get(compcom[comm].comm);
+		await command["excomp"](interaction);
 	};
 
 	if (!interaction.isChatInputCommand()) return;
