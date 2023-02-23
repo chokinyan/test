@@ -67,8 +67,8 @@ test = (async () => {
     await page.waitForSelector('body > div.header > div.header__set > div.header__set2 > nav > div > button');
     await page.click('body > div.header > div.header__set > div.header__set2 > nav > div > button');
     await page.click("body > div.header > div.header__set > div.header__set2 > nav > div > div > ul > li:nth-child(1) > a");
-
 //----------------------------------------------------------------------------------------------------------------------------------------
+    await page.waitForSelector("body > div.header > nav > ul.services-shortcut > li:nth-child(2) > a",{visible : 'visible'});
     await page.click("body > div.header > nav > ul.services-shortcut > li:nth-child(2) > a");
 
     const test = await  page.$$eval('li',element => element.map(x => x.className));
@@ -84,13 +84,15 @@ test = (async () => {
       listauto.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col--xs-3.col--full > span > span:nth-child(7)`,(e => e.textContent.trim())));
     };
 
-    await page.click('#js_boite_reception > li:nth-child(1) > div.col.col--xs-5 > span.text-ellipsis > a');
+    await page.click('#js_boite_reception > li:nth-child(1) > div.col.col--xs-5 > span.text-ellipsis > a',{delay : 50});
 
-    console.log(await page.$eval('#discussion_message0 > div.row > div > blockquote',op => op.textContent));
+    //await page.waitForSelector('#discussion_message0 > div.row > div > blockquote');
+
+    console.log(await page.$eval('#discussion_message0 > div.row > div',op => op.textContent.trim()));
 
     console.log("fini");
   };
 
-
+  await page.goBack();
   //await browser.close();
 })();

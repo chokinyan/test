@@ -2,7 +2,8 @@ const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('./config.json')
 
 const testz = async function obj() {
-    let listobjt = []
+    let listobjt = [];
+    let listmess = [];
     const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
     const page = await browser.newPage();
     const keyboard = page.keyboard
@@ -49,14 +50,25 @@ const testz = async function obj() {
     };
 
     for (let x=1;x<25;x++){
-        listobjt.push({label : (await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))).substring(0,99), value : `${x}`});
+        try{
+
+            listobjt.push({label : (await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))).substring(0,99), value : `${x}`});
+        }
+        catch {
+            break;
+        };
     };
 
+    for(let y = 1;y< listobjt.length; y++){
+        await page.click(`#js_boite_reception > li:nth-child(${y}) > div.col.col--xs-5 > span.text-ellipsis > a`,{delay : 50});
+        listmess.push(await page.$eval('#discussion_message0 > div.row > div',op => op.textContent.trim()));
+        await page.goBack();
+    };
     //console.log(listmess.map(x => x));
 
     browser.close();
     
-    return listobjt;
+    return listobjt,listmess;
 
 };
 

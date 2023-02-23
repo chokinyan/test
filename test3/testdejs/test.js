@@ -1,2 +1,5 @@
-let test = "Rencontre avec les lycéens en situation de handicap en vue d'accompagner l'accès aux études supérieures";
-console.log(test.substring(0,99));
+const {testz} = require('./donné & autre/objet_mess_return');
+
+(async () =>{
+    console.log(await testz());
+})();
