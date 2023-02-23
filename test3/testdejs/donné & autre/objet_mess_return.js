@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('./config.json')
 
-const test = async function obj() {
+const testz = async function obj() {
     let listobjt = []
     const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
     const page = await browser.newPage();
@@ -48,12 +48,11 @@ const test = async function obj() {
       };
     };
 
-    for (let x=1;x<ok.length;x++){
-        listobjt.push({label : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim())), value : await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))});
+    for (let x=1;x<25;x++){
+        listobjt.push({label : (await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))).substring(0,99), value : `${x}`});
     };
 
     //console.log(listmess.map(x => x));
-    console.log("finie");
 
     browser.close();
     
@@ -61,7 +60,4 @@ const test = async function obj() {
 
 };
 
-
-console.log(test());
-
-module.exports = {test};
+module.exports = {testz};

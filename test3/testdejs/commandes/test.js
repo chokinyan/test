@@ -17,7 +17,7 @@ module.exports = {
                     new StringSelectMenuBuilder()
                     .setCustomId('select')
                     .setPlaceholder("Rien n'a été selectionné")
-                    .addOptions(
+                    .setOptions(
                         {
                             label : 'test',
                             description : 'test1',
