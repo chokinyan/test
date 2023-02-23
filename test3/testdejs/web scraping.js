@@ -36,7 +36,7 @@ let listauto = [];
  
 
 test = (async () => {
-  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : false ,slowMo: 10 ,product : 'chrome'});
+  const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
   const page = await browser.newPage();
   const keyboard = page.keyboard;
   await page.goto("https://www.monbureaunumerique.fr/");
@@ -84,11 +84,11 @@ test = (async () => {
       listauto.push(await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col--xs-3.col--full > span > span:nth-child(7)`,(e => e.textContent.trim())));
     };
 
-    await page.click('#js_boite_reception > li:nth-child(1) > div.col.col--xs-5 > span.text-ellipsis > a',{delay : 50});
+    await page.click('#js_boite_reception > li:nth-child(5) > div.col.col--xs-5 > span.text-ellipsis > a',{delay : 50});
 
     //await page.waitForSelector('#discussion_message0 > div.row > div > blockquote');
 
-    console.log(await page.$eval('#discussion_message0 > div.row > div',op => op.textContent.trim()));
+    console.log(await page.$eval('#discussion_message0 > div.row > div',op => op.querySelector('p')));
 
     console.log("fini");
   };

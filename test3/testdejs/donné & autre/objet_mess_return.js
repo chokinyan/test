@@ -61,6 +61,7 @@ const testz = async function obj() {
 
     for(let y = 1;y< listobjt.length; y++){
         await page.click(`#js_boite_reception > li:nth-child(${y}) > div.col.col--xs-5 > span.text-ellipsis > a`,{delay : 50});
+        console.log(y);
         listmess.push(await page.$eval('#discussion_message0 > div.row > div',op => op.textContent.trim()));
         await page.goBack();
     };
