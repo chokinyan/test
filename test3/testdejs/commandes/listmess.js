@@ -16,6 +16,7 @@ module.exports = {
             ),
 
     async excute(interaction){
+        interaction.reply({content :`une fois les objet et auteur des ${interaction.options.getInteger('nbmess')} messages, ils vous seront envoyé en dm par le bot`, ephemeral: true})
         const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
             const page = await browser.newPage();
             const keyboard = page.keyboard
