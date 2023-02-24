@@ -85,14 +85,12 @@ test = (async () => {
     };
 
     await page.click('#js_boite_reception > li:nth-child(5) > div.col.col--xs-5 > span.text-ellipsis > a',{delay : 50});
-
-    //await page.waitForSelector('#discussion_message0 > div.row > div > blockquote');
-
-    console.log(await page.$eval('#discussion_message0 > div.row > div',op => op.querySelector('p')));
-
-    console.log("fini");
+    const etstest = await page.$eval('#discussion_message0 > div.row > div',(op => op.textContent));
+    console.log(etstest.includes('À télécharger')),
+    console.log(etstest.substring(0,etstest.indexOf('À télécharger')).trim());
   };
 
   await page.goBack();
   //await browser.close();
+  await browser.close();
 })();

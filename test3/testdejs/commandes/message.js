@@ -15,13 +15,15 @@ module.exports = {
 
     async excute(interaction){
         interaction.reply({content : "Veuillez patienter le temps de la connexion"});
-        const mess = (await testz()).map(x => x);
+        const list = await testz()
+        const obj = list[0].map(x => x);
+        const mess = list[1];
         const choix = new ActionRowBuilder()
             .setComponents(
                 new StringSelectMenuBuilder()
                 .setCustomId('message')
                 .setPlaceholder("Choisi l'objet du message a afficher")
-                .setOptions(mess)
+                .setOptions(obj)
             );
         await interaction.editReply({content : "testetsest",components : [choix]});
         //await interaction.editReply({content : `${await testz()}`});

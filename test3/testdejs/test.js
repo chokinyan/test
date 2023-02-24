@@ -1,5 +1,6 @@
 const {testz} = require('./donné & autre/objet_mess_return');
 
 (async () =>{
-    console.log(await testz());
+    const test = (await testz())[0];
+    console.log(test);
 })();
