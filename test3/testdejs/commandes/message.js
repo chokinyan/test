@@ -2,7 +2,7 @@ const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('../donné & autre/config.json');
 const {testz} = require('../donné & autre/objet_mess_return');
-const waw = [{label : "ezrezrzerez" , value : "zrbnzFIOBZFBQZIFB"},{label : "4zeezez" , value : "sqsqsqsq"}];
+//const waw = [{label : "ezrezrzerez" , value : "zrbnzFIOBZFBQZIFB"},{label : "4zeezez" , value : "sqsqsqsq"}];
 
 
 
@@ -15,23 +15,22 @@ module.exports = {
 
     async excute(interaction){
         interaction.reply({content : "Veuillez patienter le temps de la connexion"});
-        const list = await testz()
-        const obj = list[0].map(x => x);
-        const mess = list[1];
         const choix = new ActionRowBuilder()
             .setComponents(
                 new StringSelectMenuBuilder()
                 .setCustomId('message')
                 .setPlaceholder("Choisi l'objet du message a afficher")
-                .setOptions(obj)
+                .setOptions((await testz())[0])
             );
         await interaction.editReply({content : "testetsest",components : [choix]});
         //await interaction.editReply({content : `${await testz()}`});
     },
 
     async excomp(interaction){
-        //await interaction.update({content : "1 v 1 ?"});
-        console.log(4668796);
+        await interaction.update({content : "recuperation du message"});
+        const mess = (await testz())[1];
+        await interaction.update({content : mess[interaction.values]});
+        //console.log(4668796);
     }
 };
 
