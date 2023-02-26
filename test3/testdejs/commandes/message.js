@@ -2,11 +2,6 @@ const {SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder} = require
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('../donné & autre/config.json');
 const {testz} = require('../donné & autre/objet_mess_return');
-//const waw = [{label : "ezrezrzerez" , value : "zrbnzFIOBZFBQZIFB"},{label : "4zeezez" , value : "sqsqsqsq"}];
-
-
-
-
 
 module.exports = {
     data : test = new SlashCommandBuilder()
@@ -14,23 +9,20 @@ module.exports = {
         .setDescription("donne le message"),
 
     async excute(interaction){
-        interaction.reply({content : "Veuillez patienter le temps de la connexion"});
+        interaction.reply({content : "Veuillez patienter le temps de la connexion",ephemeral : true});
         const choix = new ActionRowBuilder()
             .setComponents(
                 new StringSelectMenuBuilder()
                 .setCustomId('message')
                 .setPlaceholder("Choisi l'objet du message a afficher")
-                .setOptions((await testz())[0])
+                .setOptions((await testz()))
             );
         await interaction.editReply({content : "testetsest",components : [choix]});
-        //await interaction.editReply({content : `${await testz()}`});
     },
 
     async excomp(interaction){
-        await interaction.update({content : "recuperation du message"});
-        const mess = (await testz())[1];
-        await interaction.update({content : mess[interaction.values]});
-        //console.log(4668796);
-    }
+        await interaction.update({content : "Le message vous serras envoyé en message privé"});
+        //console.log(interaction);
+        await interaction.user.send({content : await testz(rec_mess = true,num = interaction.values)});
+    },
 };
-

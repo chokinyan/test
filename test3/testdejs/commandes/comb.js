@@ -45,7 +45,7 @@ module.exports = {
 
             };
             //await page.screenshot({path : "test3/testdejs/video/test.png"});
-            interaction.update({content : "test de connexion reussie"});
+            interaction.update({content : "test de connexion reussie",ephemeral:true});
             await browser.close();
     }
 }

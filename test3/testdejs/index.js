@@ -26,9 +26,8 @@ client.once(Events.ClientReady, () => {
 //1074436303908778096
 //------------------------------------------------------------------------------------------
 client.on(Events.InteractionCreate, async interaction  => {
-	//console.log(`${interaction.component} zrzararezarzerzrzerezzrfszefsfes`);
+
 	if(interaction.component != undefined){
-		//const command = client.commands.get();
 		const comm = compcom.map(x => (x.name == interaction.customId)).indexOf(true);
 		const command = client.commands.get(compcom[comm].comm);
 		await command["excomp"](interaction);

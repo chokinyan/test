@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 const {identifiant,mdp} = require('./config.json')
 
-const testz = async function obj() {
+const testz = async function obj(rec_mess = false,num = 1) {
     let listobjt = [];
-    let listmess = [];
+    let mess = "";
     let tempmess = '';
     const browser = await puppeteer.launch({executablePath : 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' ,headless : true ,slowMo: 10 ,product : 'chrome'});
     const page = await browser.newPage();
@@ -28,7 +28,6 @@ const testz = async function obj() {
     await keyboard.sendCharacter(identifiant);
     await page.click('#password');
     await keyboard.sendCharacter(mdp);
-    //console.log("arfzafzafe");
     await page.click('#bouton_valider',{delay : 50});
     if (page.url() == "https://cas.monbureaunumerique.fr/saml/SAMLAssertionConsumer"){
         await page.click("body > main > div > div > div > div > div > div > div > div > div.msg__content > p:nth-child(4) > strong > a");
@@ -50,34 +49,33 @@ const testz = async function obj() {
       };
     };
 
-    for (let x=1;x<25;x++){
-        try{
-
-            listobjt.push({label : (await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))).substring(0,99), value : `${x}`});
-        }
-        catch {
-            break;
+    if(!rec_mess){
+        for (let x=1;x<25;x++){
+            try{
+                listobjt.push({label : (await page.$eval(`#js_boite_reception > li:nth-child(${x}) > div.col.col--xs-5 > span.text-ellipsis > a`,(d => d.textContent.trim()))).substring(0,99), value : `${x}`});
+            }
+            catch (e){
+                console.log(e);
+                break;
+            };
         };
-    };
+        browser.close();
+        return listobjt;
+    }
+    else{
 
-    for(let y = 1;y< listobjt.length+1; y++){
-        await page.click(`#js_boite_reception > li:nth-child(${y}) > div.col.col--xs-5 > span.text-ellipsis > a`,{delay : 50});
+        await page.click(`#js_boite_reception > li:nth-child(${num}) > div.col.col--xs-5 > span.text-ellipsis > a`,{delay : 50});
         tempmess = (await page.$eval('#discussion_message0 > div.row > div',op => op.textContent));
         if(tempmess.includes('À télécharger')){
-            tempmess = tempmess.substring(0,tempmess.indexOf('À télécharger')).trim();
-            listmess.push(tempmess);
+            tempmess = tempmess.substring(0,tempmess.indexOf('À télécharger'));
+            mess = tempmess;
         }
         else{
-            listmess.push(tempmess.trim());
+            mess = tempmess;
         }
-        await page.goBack();
+        browser.close();
+        return mess;
     };
-    //console.log(listmess.map(x => x));
-
-    //browser.close();
-    
-    return [listobjt,listmess];
-
 };
 
 module.exports = {testz};
